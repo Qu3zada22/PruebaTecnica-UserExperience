@@ -1,0 +1,74 @@
+{
+  "indicatorsData": {
+    "totalEmployees": 120,
+    "averagePerformance": 0.82,
+    "highPerformers": 35,
+    "lowPerformers": 15
+  },
+  "graphData": [
+    { "month": "Enero", "averagePerformance": 0.75 },
+    { "month": "Febrero", "averagePerformance": 0.78 },
+    { "month": "Marzo", "averagePerformance": 0.8 },
+    { "month": "Abril", "averagePerformance": 0.82 },
+    { "month": "Mayo", "averagePerformance": 0.79 },
+    { "month": "Junio", "averagePerformance": 0.85 }
+  ],
+  "tableData": [
+    {
+      "id": "E001",
+      "name": "Ana López",
+      "department": "Ventas",
+      "performance": 0.9,
+      "status": "High"
+    },
+    {
+      "id": "E002",
+      "name": "Luis Pérez",
+      "department": "Marketing",
+      "performance": 0.76,
+      "status": "Medium"
+    },
+    {
+      "id": "E003",
+      "name": "María Díaz",
+      "department": "Operaciones",
+      "performance": 0.65,
+      "status": "Low"
+    },
+    {
+      "id": "E004",
+      "name": "Pedro Gómez",
+      "department": "Ventas",
+      "performance": 0.88,
+      "status": "High"
+    },
+    {
+      "id": "E005",
+      "name": "Sofía Herrera",
+      "department": "Recursos Humanos",
+      "performance": 0.82,
+      "status": "Medium"
+    },
+    {
+      "id": "E006",
+      "name": "Carlos Méndez",
+      "department": "Finanzas",
+      "performance": 0.7,
+      "status": "Medium"
+    },
+    {
+      "id": "E007",
+      "name": "Laura Torres",
+      "department": "Operaciones",
+      "performance": 0.95,
+      "status": "High"
+    },
+    {
+      "id": "E008",
+      "name": "Andrés Castillo",
+      "department": "Marketing",
+      "performance": 0.6,
+      "status": "Low"
+    }
+  ]
+}
