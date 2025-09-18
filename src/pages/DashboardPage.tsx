@@ -23,7 +23,7 @@ function DashboardPage() {
     
     <AppLayout>
       {/* KPIs */}
-        <div className="flex flex-wrap gap-4 mb-6">
+        <div className="flex flex-wrap gap-6 mb-6">
         <KPICard
             title="Total de empleados"
             value={indicatorsData.totalEmployees}

@@ -29,11 +29,12 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ data }) => {
     )
   }, [data, searchTerm])
 
+  // Actualizamos los colores por estado
   const getStatusBadge = (status: string) => {
     const statusMap = {
       Bajo: "bg-[#F3D4D1] text-[#7A1914]",   // rosadito con texto oscuro
-      Medio: "bg-[#EFEEAD] text-[#7A6B00]",  // amarillo claro con texto oscuro
-      Alto: "bg-[#C5EBC2] text-[#1F4D1E]",   // verde suave con texto oscuro
+      Medio: "bg-[#EFEEAD] text-[#7A6B00]",  // amarillo con texto oscuro
+      Alto: "bg-[#C5EBC2] text-[#1F4D1E]",   // verde con texto oscuro
     }
     return statusMap[status as keyof typeof statusMap] || "bg-gray-100 text-gray-800"
   }
@@ -63,14 +64,15 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ data }) => {
         <table className="min-w-full divide-y divide-gray-200">
           <thead className="bg-[#FEE5D6]">
             <tr>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ID</th>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">NOMBRE</th>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">DEPARTAMENTO</th>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">RENDIMIENTO</th>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ESTADO</th>
+              <th className="px-3 py-2 text-left text-xs font-semibold text-white-600 uppercase tracking-wider">ID</th>
+              <th className="px-3 py-2 text-left text-xs font-semibold text-white-600 uppercase tracking-wider">NOMBRE</th>
+              <th className="px-3 py-2 text-left text-xs font-semibold text-white-600 uppercase tracking-wider">DEPARTAMENTO</th>
+              <th className="px-3 py-2 text-left text-xs font-semibold text-white-600 uppercase tracking-wider">RENDIMIENTO</th>
+              <th className="px-3 py-2 text-left text-xs font-semibold text-white-600 uppercase tracking-wider">ESTADO</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-200">
+
+          <tbody className="divide-y divide-[#ffffff]">
             {filteredData.map((employee, index) => (
               <tr key={index} className="hover:bg-gray-100 transition-colors duration-150">
                 <td className="px-3 py-2 text-sm font-medium text-gray-900">{employee.id}</td>
