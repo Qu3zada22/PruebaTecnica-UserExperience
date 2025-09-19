@@ -1,26 +1,16 @@
-import Sidebar from "./Sidebar"
 import Header from "./Header"
-import type { ReactNode } from "react"
+import Sidebar from "./Sidebar"
 
-interface AppLayoutProps {
-  children: ReactNode
-}
-
-export default function AppLayout({ children }: AppLayoutProps) {
+export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex h-[100vh] w-screen bg-gray-50 overflow-hidden">
-      {/* Sidebar */}
-      <Sidebar />
-
-      {/* Contenido principal */}
-      <div className="flex flex-col flex-1 min-h-0">
-        {/* Header */}
-        <Header />
-
-        {/* Área scrollable */}
-        <main className="flex-1 overflow-auto p-4 md:p-6 w-full min-h-0">
-          {children}
-        </main>
+    <div
+      className="flex flex-col min-h-screen w-full text-black dark:text-white"
+      style={{ backgroundColor: "var(--background-color)" }}
+    >
+      <Header />
+      <div className="flex flex-1">
+        <Sidebar />
+        <main className="flex-1 p-6">{children}</main>
       </div>
     </div>
   )

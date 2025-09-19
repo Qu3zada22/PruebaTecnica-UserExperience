@@ -1,15 +1,13 @@
 "use client"
 
-import type React from "react"
+import React, { useState, useMemo } from "react"
 import { Search } from "lucide-react"
-import { useState, useMemo } from "react"
 
 interface Employee {
   id: string
   name: string
   department: string
-  performance: number
-  status: string
+  performance: number 
 }
 
 interface EmployeeTableProps {
@@ -21,76 +19,93 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ data }) => {
 
   const filteredData = useMemo(() => {
     if (!searchTerm) return data
+    const q = searchTerm.toLowerCase()
     return data.filter(
-      (employee) =>
-        employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.id.toLowerCase().includes(searchTerm.toLowerCase()),
+      (e) =>
+        e.name.toLowerCase().includes(q) ||
+        e.department.toLowerCase().includes(q) ||
+        e.id.toLowerCase().includes(q),
     )
   }, [data, searchTerm])
 
-  // Actualizamos los colores por estado
-  const getStatusBadge = (status: string) => {
-    const statusMap = {
-      Bajo: "bg-[#F3D4D1] text-[#7A1914]",   // rosadito con texto oscuro
-      Medio: "bg-[#EFEEAD] text-[#7A6B00]",  // amarillo con texto oscuro
-      Alto: "bg-[#C5EBC2] text-[#1F4D1E]",   // verde con texto oscuro
+  const badgeFromPerformance = (perf: number) => {
+    const pct = Math.round(perf * 100)
+    if (pct >= 80) {
+      return {
+        cls: "bg-green-200 text-green-800 dark:bg-green-700 dark:text-green-200",
+        label: "Alto",
+        pct,
+      }
     }
-    return statusMap[status as keyof typeof statusMap] || "bg-gray-100 text-gray-800"
+    if (pct >= 60) {
+      return {
+        cls: "bg-yellow-200 text-yellow-800 dark:bg-yellow-700 dark:text-yellow-200",
+        label: "Medio",
+        pct,
+      }
+    }
+    return {
+      cls: "bg-red-200 text-red-800 dark:bg-red-700 dark:text-red-200",
+      label: "Bajo",
+      pct,
+    }
   }
 
   return (
     <div
-      className="rounded-xl shadow-sm border border-gray-200 h-full flex flex-col p-4"
-      style={{ backgroundColor: "#FEE5D6" }}
+      className="rounded-xl shadow-sm border border-gray-100 p-4 flex flex-col w-full max-w-4xl max-h-[600px] min-w-[280px] h-[60vh] overflow-x-auto"
+      style={{ backgroundColor: "var(--table-bg)", color: "var(--text-color)" }}
     >
       {/* Buscador */}
-      <div
-        className="flex items-center rounded-lg px-3 py-2 mb-4 border border-gray-200"
-        style={{ backgroundColor: "rgba(255, 251, 249, 0.83)" }}
-      >
-        <Search className="w-5 h-5 text-gray-400 mr-2" />
+      <div className="flex items-center mb-4">
+        <Search className="w-4 h-4 mr-2 flex-shrink-0" style={{ color: "var(--text-color)" }} />
         <input
           type="text"
           placeholder="Buscar empleado..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="bg-transparent text-sm text-gray-600 flex-1 outline-none"
+          className="flex-1 text-sm px-3 py-2 border border-gray-200 rounded-lg bg-[rgba(255,251,249,0.83)] dark:bg-[rgba(62,75,107,0.83)] outline-none"
+          style={{ color: "var(--text-color)" }}
         />
       </div>
 
       {/* Tabla */}
       <div className="flex-1 overflow-auto">
-        <table className="min-w-full divide-y divide-gray-200">
-          <thead className="bg-[#FEE5D6]">
+        <table className="table-auto min-w-full border-collapse" style={{ color: "var(--text-color)" }}>
+          <thead>
             <tr>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-white-600 uppercase tracking-wider">ID</th>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-white-600 uppercase tracking-wider">NOMBRE</th>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-white-600 uppercase tracking-wider">DEPARTAMENTO</th>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-white-600 uppercase tracking-wider">RENDIMIENTO</th>
-              <th className="px-3 py-2 text-left text-xs font-semibold text-white-600 uppercase tracking-wider">ESTADO</th>
+              <th className="px-2 py-2 text-left text-xs font-semibold uppercase" style={{ color: "var(--text-color)" }}>ID</th>
+              <th className="px-2 py-2 text-left text-xs font-semibold uppercase" style={{ color: "var(--text-color)" }}>Nombre</th>
+              <th className="px-2 py-2 text-left text-xs font-semibold uppercase" style={{ color: "var(--text-color)" }}>Departamento</th>
+              <th className="px-2 py-2 text-left text-xs font-semibold uppercase" style={{ color: "var(--text-color)" }}>Rendimiento</th>
+              <th className="px-2 py-2 text-left text-xs font-semibold uppercase" style={{ color: "var(--text-color)" }}>Estado</th>
             </tr>
           </thead>
-
-          <tbody className="divide-y divide-[#ffffff]">
-            {filteredData.map((employee, index) => (
-              <tr key={index} className="hover:bg-gray-100 transition-colors duration-150">
-                <td className="px-3 py-2 text-sm font-medium text-gray-900">{employee.id}</td>
-                <td className="px-3 py-2 text-sm text-gray-900">{employee.name}</td>
-                <td className="px-3 py-2 text-sm text-gray-700">{employee.department}</td>
-                <td className="px-3 py-2 text-sm font-semibold text-gray-900">
-                  {Math.round(employee.performance * 100)}%
-                </td>
-                <td className="px-3 py-2">
-                  <span className={`inline-flex px-3 py-1 text-xs font-medium rounded-full ${getStatusBadge(employee.status)}`}>
-                    {employee.status}
-                  </span>
-                </td>
-              </tr>
-            ))}
+          <tbody>
+            {filteredData.map((employee, idx) => {
+              const badge = badgeFromPerformance(employee.performance)
+              return (
+                <tr key={employee.id ?? idx} className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-150">
+                  <td className="px-2 py-2 text-sm font-medium" style={{ color: "var(--text-color)" }}>{employee.id}</td>
+                  <td className="px-2 py-2 text-sm" style={{ color: "var(--text-color)" }}>{employee.name}</td>
+                  <td className="px-2 py-2 text-sm" style={{ color: "var(--text-color)" }}>{employee.department}</td>
+                  <td className="px-2 py-2 text-sm font-semibold" style={{ color: "var(--text-color)" }}>
+                    {Math.round(employee.performance * 100)}%
+                  </td>
+                  <td className="px-2 py-2">
+                    <span
+                      className={`inline-flex items-center justify-center px-3 py-1 text-xs font-medium rounded-full ${badge.cls}`}
+                      title={`${badge.pct}%`}
+                    >
+                      {badge.label}
+                    </span>
+                  </td>
+                </tr>
+              )
+            })}
             {filteredData.length === 0 && (
               <tr>
-                <td colSpan={5} className="px-3 py-4 text-center text-sm text-gray-500">
+                <td colSpan={5} className="px-3 py-4 text-center text-sm" style={{ color: "var(--text-color)" }}>
                   No se encontraron empleados que coincidan con la búsqueda
                 </td>
               </tr>

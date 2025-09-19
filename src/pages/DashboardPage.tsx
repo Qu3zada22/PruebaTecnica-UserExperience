@@ -17,52 +17,49 @@ function DashboardPage() {
   const { indicatorsData, graphData, tableData: rawTableData } = dashboardData
   const tableData: Employee[] = rawTableData
 
-
   return (
-
-    
     <AppLayout>
       {/* KPIs */}
-        <div className="flex flex-wrap gap-6 mb-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         <KPICard
-            title="Total de empleados"
-            value={indicatorsData.totalEmployees}
-            subtitle="Empleados activos en la organización"
-            trend="+5% vs el mes pasado"
-            type="total"
+          title="Total de empleados"
+          value={indicatorsData.totalEmployees}
+          subtitle="Empleados activos en la organización"
+          trend="+5% vs el mes pasado"
+          type="total"
         />
         <KPICard
-            title="Rendimiento promedio"
-            value={`${Math.round(indicatorsData.averagePerformance * 100)}%`}
-            subtitle="Rendimiento general del equipo"
-            trend="+3% vs el mes pasado"
-            type="average"
+          title="Rendimiento promedio"
+          value={`${Math.round(indicatorsData.averagePerformance * 100)}%`}
+          subtitle="Rendimiento general del equipo"
+          trend="+3% vs el mes pasado"
+          type="average"
         />
         <KPICard
-            title="Alto rendimiento"
-            value={indicatorsData.highPerformers}
-            subtitle="Empleados con rendimiento superior"
-            trend="+8% vs el mes pasado"
-            type="high"
+          title="Alto rendimiento"
+          value={indicatorsData.highPerformers}
+          subtitle="Empleados con rendimiento superior"
+          trend="+8% vs el mes pasado"
+          type="high"
         />
         <KPICard
-            title="Bajo rendimiento"
-            value={indicatorsData.lowPerformers}
-            subtitle="Empleados que necesitan apoyo"
-            trend="-2% vs el mes pasado"
-            type="low"
+          title="Bajo rendimiento"
+          value={indicatorsData.lowPerformers}
+          subtitle="Empleados que necesitan apoyo"
+          trend="-2% vs el mes pasado"
+          type="low"
         />
-</div>
+      </div>
 
       {/* Contenido principal: gráficas + tabla */}
-      <div className="flex flex-col lg:flex-row gap-6">
+      <div className="flex flex-col lg:flex-row gap-6 mt-10">
         {/* Columna izquierda: gráficas */}
-        <div className="flex flex-col gap-6 w-full lg:w-[360px]">
+        <div className="w-full lg:w-80 mt-30">
           <PerformanceChart data={graphData} />
         </div>
 
         {/* Columna derecha: tabla */}
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 ">
           <EmployeeTable data={tableData} />
         </div>
       </div>
