@@ -5,7 +5,7 @@ Este proyecto es un Dashboard de empleados construido con React + Vite + TypeScr
 
 Instalación y ejecución
 Clona el repositorio:
-git clone https://github.com/tuusuario/PruebaTecnica-UserExperience.git
+git clone https://github.com/Qu3zada22/PruebaTecnica-UserExperience.git
 cd PruebaTecnica-UserExperience
 
 Instalar las dependencias:
