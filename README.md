@@ -1,3 +1,29 @@
+
+Prueba Técnica - User Experience Dashboard
+
+Este proyecto es un Dashboard de empleados construido con React + Vite + TypeScript + TailwindCSS.
+
+Instalación y ejecución
+Clona el repositorio:
+git clone https://github.com/tuusuario/PruebaTecnica-UserExperience.git
+cd PruebaTecnica-UserExperience
+
+Instalar las dependencias:
+npm install
+Iniciar el servidor de desarrollo:
+npm run dev
+Abrir en el navegador:http://localhost:5173
+
+Temas de color
+La aplicación soporta modo claro y modo oscuro gracias a ThemeToggle.
+Claro (flamingo)
+Oscuro (mirage)
+
+Autor
+Desarrollado por Anggie Q. para la prueba técnica de User Experience ✨
+
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
